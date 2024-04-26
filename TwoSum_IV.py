@@ -1,17 +1,19 @@
 class Solution:
     def findTarget(self, root: Optional[TreeNode], k: int) -> bool:
-        def inorder(root):
-            if not root:
-                return []
-            return inorder(root.left) + [root.val] + inorder(root.right)
-
-        numbers = inorder(root)
-        l, r = 0, len(numbers) - 1
-        while l < r:
-            if numbers[l] + numbers[r] < k:
-                l += 1
-            elif numbers[l] + numbers[r] > k:
-                r -= 1
-            else:
+        if not root:
+            return False
+        
+        seen = set()
+        stack = [root]
+        
+        while stack:
+            node = stack.pop()
+            if k - node.val in seen:
                 return True
+            seen.add(node.val)
+            if node.right:
+                stack.append(node.right)
+            if node.left:
+                stack.append(node.left)
+        
         return False
