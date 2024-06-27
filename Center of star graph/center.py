@@ -1,10 +1,14 @@
 class Solution:
-def findCenter(self, edges: List[List[int]]) -> int:
-    degree = collections.Counter()
-    for node1, node2 in edges:
-        degree[node1] += 1
-        degree[node2] += 1
+    def findCenter(self, edges: List[List[int]]) -> int:
+        first  = edges[0]
+        second =  edges[1]
+        if first[0] in second:
+            return first[0] 
+        
+        else:
+            return first[1]
 
-    for node, count in degree.items():
-        if count == len(edges):
-            return node
+        
+
+        
+            
